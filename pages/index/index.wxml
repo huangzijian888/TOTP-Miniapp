@@ -1,0 +1,52 @@
+<view class="container">
+    <!-- 账户信息区域 -->
+    <view class="account-container">
+        <view class="header">
+            <!-- 账号logo -->
+            <view class="logo">
+                <image src="../../static/logo/github.png"></image>
+            </view>
+            <!-- 备注 -->
+            <view class="title">Github</view>
+        </view>
+        <view class="account">huangzijian888</view>
+    </view>
+    <!-- 验证码区域 -->
+    <view class="code-container">
+        <!-- 验证码 -->
+        <view class="code">777 888</view>
+        <!-- 倒计时 -->
+        <view class="countdown">
+            <view class="dot dot-green" wx:for="{{3}}"></view>
+            <view class="dot dot-yellow" wx:for="{{2}}"></view>
+            <view class="dot dot-red" ></view>
+        </view>
+    </view>
+</view>
+<view class="container">
+    <!-- 账户信息区域 -->
+    <view class="account-container">
+        <view class="header">
+            <!-- 账号logo -->
+            <view class="logo">
+                <image src="../../static/logo/google.png"></image>
+            </view>
+            <!-- 备注 -->
+            <view class="title">Google</view>
+        </view>
+        <view class="account">huangzijian888@gmail.com</view>
+    </view>
+    <!-- 验证码区域 -->
+    <view class="code-container">
+        <!-- 验证码 -->
+        <view class="code">969 158</view>
+        <!-- 倒计时 -->
+        <view class="countdown">
+            <view class="dot dot-green" wx:for="{{3}}"></view>
+            <view class="dot dot-yellow"></view>
+            <view class="dot" wx:for="{{2}}"></view>
+        </view>
+    </view>
+</view>
+
+
