@@ -33,7 +33,7 @@ page {
     height: 100%;
 }
 
-.title {
+.issuer {
     color: #fff;
     font-size: 50rpx;
     line-height: 50rpx;

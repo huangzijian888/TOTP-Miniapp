@@ -1,3 +1,6 @@
+const TOTP = require('../../utils/totp')
+let util = require('../../utils/util')
+
 Page({
 
     /**
@@ -11,7 +14,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        const second = util.getSeconds() % 30;
+        this.setData({
+            current_index: Math.floor(second / 5)
+        })
     },
 
     /**
@@ -25,21 +31,42 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        setInterval(() => {
-            const index = this.data.current_index
-            if (index === 5) {
+        const timer = setInterval(() => {
+            let i = util.getSeconds() % 30;
+            if (i % 5 === 0) {
+                if (i === 0) {
+                    this.updateCode();
+                }
                 this.setData({
-                    current_index: 0
-                })
-            } else {
-                this.setData({
-                    current_index: this.data.current_index + 1
-                })
+                    current_index: Math.floor(i / 5)
+                });
             }
-            console.log(this.data.current_index)
-        }, 5000)
+        }, 1000)
+        this.updateCode();
     },
-
+    updateCode: function () {
+        const tokens = [
+            {
+                logo_url: '../../static/logo/github.png',
+                issuer: 'Github',
+                account: 'huangzijian888',
+                secret: 'test'
+            },
+            {
+                logo_url: '../../static/logo/google.png',
+                issuer: 'Google',
+                account: 'huangzijian888@gmail.com',
+                secret: 'huangzijian'
+            }
+        ]
+        for (let i = 0; i < tokens.length; i++) {
+            let code = TOTP.now(tokens[i].secret);
+            tokens[i].code = code
+        }
+        this.setData({
+            tokens
+        })
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */
