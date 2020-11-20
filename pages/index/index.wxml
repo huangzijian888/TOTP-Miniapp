@@ -17,9 +17,12 @@
         <view class="code">777 888</view>
         <!-- 倒计时 -->
         <view class="countdown">
-            <view class="dot dot-green" wx:for="{{3}}"></view>
-            <view class="dot dot-yellow" wx:for="{{2}}"></view>
-            <view class="dot dot-red" ></view>
+            <view class="dot dot-green"></view>
+            <view class="dot {{current_index>=1?'dot-green':''}}"></view>
+            <view class="dot {{current_index>=2?'dot-green':''}}"></view>
+            <view class="dot {{current_index>=3?'dot-yellow':''}}"></view>
+            <view class="dot {{current_index>=4?'dot-yellow':''}}"></view>
+            <view class="dot {{current_index===5?'dot-red':''}}"></view>
         </view>
     </view>
 </view>
@@ -42,9 +45,12 @@
         <view class="code">969 158</view>
         <!-- 倒计时 -->
         <view class="countdown">
-            <view class="dot dot-green" wx:for="{{3}}"></view>
-            <view class="dot dot-yellow"></view>
-            <view class="dot" wx:for="{{2}}"></view>
+            <view class="dot dot-green"></view>
+            <view class="dot {{current_index>=1?'dot-green':''}}"></view>
+            <view class="dot {{current_index>=2?'dot-green':''}}"></view>
+            <view class="dot {{current_index>=3?'dot-yellow':''}}"></view>
+            <view class="dot {{current_index>=4?'dot-yellow':''}}"></view>
+            <view class="dot {{current_index===5?'dot-red':''}}"></view>
         </view>
     </view>
 </view>
