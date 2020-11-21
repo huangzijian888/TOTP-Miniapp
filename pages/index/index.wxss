@@ -82,3 +82,29 @@ page {
 .dot-red {
     background-color: #ff3860 !important;
 }
+
+/* 操作按钮区域 */
+.operation-container {
+    width: 710rpx;
+    height: 120rpx;
+    padding: 20rpx 20rpx;
+    margin: 20rpx 20rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.operation-container .add {
+    width: 196rpx;
+    height: 80rpx;
+    border-radius: 60rpx;
+    text-align: center;
+    background-color: #3273DC;
+}
+
+.add text {
+    color: #fff;
+    font-size: 32rpx;
+    line-height: 80rpx;
+}
+

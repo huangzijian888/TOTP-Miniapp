@@ -26,5 +26,10 @@
         </view>
     </view>
 </view>
+<view class="operation-container">
+    <view class="add" bindtap="clickAdd">
+        <text>添加</text>
+    </view>
+</view>
 
 
