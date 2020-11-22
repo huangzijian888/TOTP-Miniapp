@@ -82,8 +82,11 @@ Page({
         })
 
     },
+    /**
+     * 识别 url 获取相关参数写入 token
+     * @param result_url
+     */
     addToken: function (result_url) {
-        const self = this
         const secret = util.getQueryByName(result_url, "secret");
         const issuer = util.getQueryByName(result_url, "issuer");
         const account = util.getAccount(result_url)
