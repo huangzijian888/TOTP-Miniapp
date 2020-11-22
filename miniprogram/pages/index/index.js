@@ -121,6 +121,7 @@ Page({
                 showCancel: false,
             })
         }
+        this.updateCode()
         wx.showToast({
             title: '添加成功',
             icon: 'success',
