@@ -86,7 +86,7 @@ Page({
         const self = this
         const secret = util.getQueryByName(result_url, "secret");
         const issuer = util.getQueryByName(result_url, "issuer");
-        const account = util.getAccount(result_url, issuer)
+        const account = util.getAccount(result_url)
         if (!secret || !issuer || !account) {
             wx.showModal({
                 title: '错误',

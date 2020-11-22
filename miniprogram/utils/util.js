@@ -22,11 +22,10 @@ function getQueryByName(url, name) {
 /**
  * 获取账户信息
  * @param url totp 链接
- * @param issuer 发布平台
  * @returns 账户信息
  */
-function getAccount(url, issuer) {
-    const reg = new RegExp('\\S+' + issuer + ':(\\S+)\\?')
+function getAccount(url) {
+    const reg = /([^\/^\:]+)(?=\?secret)/
     const account = url.match(reg);
     return account ? account[1] : null
 }
