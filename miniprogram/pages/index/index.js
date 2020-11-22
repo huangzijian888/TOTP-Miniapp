@@ -112,10 +112,15 @@ Page({
             logo_url: '../../static/logo/github.png'
         }
         let tokens = wx.getStorageSync('tokens');
-        if (!tokens) {
-            tokens = []
+        let index = this.checkTokenIsExist(issuer, account, tokens);
+        if (index !== -1) {
+            tokens[index] = token;
+        } else {
+            if (!tokens) {
+                tokens = []
+            }
+            tokens.push(token);
         }
-        tokens.push(token);
         let result = this.updateTokenStorage(tokens);
         if (!result) {
             wx.showModal({
@@ -126,10 +131,28 @@ Page({
         }
         this.updateCode()
         wx.showToast({
-            title: '添加成功',
+            title: '密钥已保存',
             icon: 'success',
             duration: 2000
         });
+    },
+    /**
+     * 检查在同一发布人下是否已经存在账户
+     * @param issuer 发布人
+     * @param account 账户
+     * @param tokens token数组
+     * @returns {number} 不存在返回 -1 存在返回索引
+     */
+    checkTokenIsExist: function (issuer, account, tokens) {
+        if (!tokens) {
+            return -1;
+        }
+        for (let i = 0; i < tokens.length; i++) {
+            if (tokens[i].issuer === issuer && tokens[i].account === account) {
+                return i;
+            }
+        }
+        return -1;
     },
     /**
      * 更新本地缓存及应用 tokens
