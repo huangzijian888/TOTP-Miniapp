@@ -8,6 +8,7 @@ Page({
      */
     data: {
         current_index: 0,
+        tokens: []
     },
 
     /**
@@ -15,9 +16,14 @@ Page({
      */
     onLoad: function (options) {
         const second = util.getSeconds() % 30;
+        let tokens = wx.getStorageSync('tokens');
+        if (!tokens) {
+            tokens = [];
+        }
         this.setData({
-            current_index: Math.floor(second / 5)
-        })
+            current_index: Math.floor(second / 5),
+            tokens: tokens
+        });
     },
 
     /**
@@ -44,28 +50,102 @@ Page({
         }, 1000)
         this.updateCode();
     },
+    /**
+     * 更新验证码
+     */
     updateCode: function () {
-        const tokens = [
-            {
-                logo_url: '../../static/logo/github.png',
-                issuer: 'Github',
-                account: 'huangzijian888',
-                secret: 'test'
-            },
-            {
-                logo_url: '../../static/logo/google.png',
-                issuer: 'Google',
-                account: 'huangzijian888@gmail.com',
-                secret: 'huangzijian'
-            }
-        ]
+        const tokens = this.data.tokens
+        if (!tokens) {
+            return;
+        }
         for (let i = 0; i < tokens.length; i++) {
-            let code = TOTP.now(tokens[i].secret);
-            tokens[i].code = code
+            tokens[i].code = TOTP.now(tokens[i].secret);
         }
         this.setData({
             tokens
         })
+    },
+    /**
+     * 添加按钮回调函数
+     */
+    clickAdd: function () {
+        const self = this
+        wx.scanCode({
+            scanType: ['qrCode'],
+            success: res => {
+                self.addToken(res.result)
+            },
+            fail: error => {
+                console.log("失败了", error)
+            }
+
+        })
+
+    },
+    addToken: function (result_url) {
+        const self = this
+        const secret = util.getQueryByName(result_url, "secret");
+        const issuer = util.getQueryByName(result_url, "issuer");
+        const account = util.getAccount(result_url, issuer)
+        if (!secret || !issuer || !account) {
+            wx.showModal({
+                title: '错误',
+                content: '不是合法的 TOTP 码',
+                showCancel: false,
+            })
+            return;
+        } else if (null == TOTP.now(secret)) {
+            wx.showModal({
+                title: '错误',
+                content: 'secret 不合法',
+                showCancel: false,
+            })
+            return;
+        }
+        let token = {
+            secret: secret,
+            issuer: issuer,
+            account: account,
+            logo_url: '../../static/logo/github.png'
+        }
+        let tokens = wx.getStorageSync('tokens');
+        if (!tokens) {
+            tokens = []
+        }
+        tokens.push(token);
+        let result = this.updateTokenStorage(tokens);
+        if (!result) {
+            wx.showModal({
+                title: '错误',
+                content: '更新数据发生异常',
+                showCancel: false,
+            })
+        }
+        wx.showToast({
+            title: '添加成功',
+            icon: 'success',
+            duration: 2000
+        });
+    },
+    /**
+     * 更新本地缓存及应用 tokens
+     * @param tokens
+     */
+    updateTokenStorage: function (tokens) {
+        if (!tokens) {
+            return 'error';
+        }
+        wx.setStorage({
+            key: 'tokens',
+            data: tokens,
+            fail: () => {
+                return 'error';
+            }
+        });
+        this.setData({
+            tokens
+        })
+        return 'success';
     },
     /**
      * 生命周期函数--监听页面隐藏
