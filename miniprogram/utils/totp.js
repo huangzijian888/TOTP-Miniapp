@@ -1,6 +1,6 @@
 // topt
-let base32 = require("base32")
-let jsSHA = require("hmac")
+let base32 = require("./base32")
+let jsSHA = require("./hmac")
 
 const DEFAULT_INTERVAL = 30
 const DEFAULT_DIGITS = 6
