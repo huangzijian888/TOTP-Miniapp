@@ -12,7 +12,7 @@
         <view class="account">{{item.account}}</view>
     </view>
     <!-- 验证码区域 -->
-    <view class="code-container">
+    <view class="code-container" data-index="{{index}}" bind:longpress="copyCode">
         <!-- 验证码 -->
         <view class="code">{{item.code}}</view>
         <!-- 倒计时 -->

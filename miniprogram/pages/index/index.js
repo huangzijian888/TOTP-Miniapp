@@ -83,6 +83,23 @@ Page({
 
     },
     /**
+     * 长按验证码区域复制验证码
+     * @param event 验证码区域长按事件
+     */
+    copyCode: function (event) {
+        const index = event.currentTarget.dataset.index
+        const code = this.data.tokens[index].code;
+        wx.setClipboardData({
+            data: code,
+            success: () => {
+                wx.showToast({
+                    title: '验证码已复制',
+                    icon: 'success'
+                })
+            }
+        })
+    },
+    /**
      * 识别 url 获取相关参数写入 token
      * @param result_url
      */
