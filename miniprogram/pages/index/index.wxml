@@ -1,4 +1,4 @@
-<view class="container" wx:for="{{tokens}}" wx:key="index">
+<view class="container" wx:for="{{tokens}}" wx:key="index" data-index="{{index}}" bind:longpress="tokenOperation">
     <!-- 账户信息区域 -->
     <view class="account-container">
         <view class="header">

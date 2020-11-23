@@ -83,6 +83,50 @@ Page({
 
     },
     /**
+     * 长按对 token 进行操作
+     * @param event 长按事件
+     */
+    tokenOperation: function (event) {
+        const self = this;
+        const index = event.currentTarget.dataset.index
+        wx.showActionSheet({
+            itemList: ['删除'],
+            success: (res) => {
+                if (res.tapIndex === 0) {
+                    self.deleteToke(index)
+                }
+            }
+        })
+    },
+    /**
+     * 删除 token
+     * @param index 索引
+     */
+    deleteToke: function (index) {
+        let tokens = this.data.tokens;
+        const self = this
+        wx.showModal({
+            title: '温馨提示',
+            content: '确定要删除吗？',
+            success: (res) => {
+                if (res.confirm) {
+                    tokens.splice(index, 1)
+                    const result = self.updateTokenStorage(tokens);
+                    if (result === 'success') {
+                        wx.showToast({
+                            title: '删除成功',
+                        })
+                    } else {
+                        wx.showToast({
+                            title: '删除失败',
+                            icon: 'none'
+                        })
+                    }
+                }
+            }
+        })
+    },
+    /**
      * 长按验证码区域复制验证码
      * @param event 验证码区域长按事件
      */
