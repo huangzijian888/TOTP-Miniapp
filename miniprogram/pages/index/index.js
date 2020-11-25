@@ -90,10 +90,15 @@ Page({
         const self = this;
         const index = event.currentTarget.dataset.index
         wx.showActionSheet({
-            itemList: ['删除'],
+            itemList: ['删除', '编辑'],
             success: (res) => {
                 if (res.tapIndex === 0) {
                     self.deleteToke(index)
+                }
+                if (res.tapIndex === 1) {
+                    wx.navigateTo({
+                        url: '/pages/edit/edit?index=' + index
+                    })
                 }
             }
         })

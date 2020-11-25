@@ -1,0 +1,141 @@
+page {
+    background-color: #242424;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 发布平台/备注  */
+.container .issuer {
+    display: flex;
+    flex-direction: column;
+    height: 152rpx;
+    margin: 20rpx 20rpx 0;
+}
+
+.issuer .title {
+    color: #7a7a7a;
+    margin-bottom: 10rpx;
+    font-size: 40rpx;
+}
+
+.issuer .input {
+    height: 80rpx;
+    padding: 0 40rpx;
+    background-color: #363636;
+    border: 1px solid #4a4a4a;
+    color: #fff;
+    font-size: 35rpx;
+    line-height: 80rpx;
+}
+
+.input input {
+    height: 80rpx;
+}
+
+/* 账号 */
+.container .account {
+    display: flex;
+    flex-direction: column;
+    height: 152rpx;
+    margin: 20rpx 20rpx 0;
+}
+
+.account .title {
+    color: #7a7a7a;
+    margin-bottom: 10rpx;
+    font-size: 40rpx;
+}
+
+.account .input {
+    height: 80rpx;
+    padding: 0 40rpx;
+    background-color: #363636;
+    border: 1px solid #4a4a4a;
+    color: #fff;
+    font-size: 35rpx;
+    line-height: 80rpx;
+}
+
+.account input {
+    height: 80rpx;
+}
+
+/* 图片区域 */
+.container .icon {
+    display: flex;
+    flex-direction: column;
+    height: 152rpx;
+    margin: 20rpx 20rpx 0;
+}
+
+.icon .title {
+    color: #7a7a7a;
+    margin-bottom: 10rpx;
+    font-size: 40rpx;
+}
+
+.upload {
+    display: flex;
+}
+
+.choose {
+    height: 80rpx;
+    width: 276rpx;
+    background-color: #363636;
+    color: #fff;
+    font-size: 35rpx;
+    line-height: 80rpx;
+    letter-spacing: 4rpx;
+    text-align: center;
+
+}
+
+.preview {
+    margin-left: 20rpx;
+    height: 80rpx;
+    width: 136rpx;
+    background-color: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview image {
+    width: 48rpx;
+    height: 48rpx;
+}
+
+/* 操作按钮区域 */
+.operation {
+    margin: 40rpx 20rpx 0;
+    display: flex;
+}
+
+.save {
+    width: 138rpx;
+    height: 80rpx;
+    color: #fff;
+    line-height: 80rpx;
+    font-size: 35rpx;
+    text-align: center;
+    background-color: #3273DC;
+}
+
+.cancel {
+    width: 138rpx;
+    height: 80rpx;
+    margin-left: 20rpx;
+    text-align: center;
+
+
+}
+.cancel text{
+    color: #4a4a4a;
+    line-height: 80rpx;
+    font-size: 35rpx;
+    border-bottom: 1px solid #4a4a4a;
+}
+

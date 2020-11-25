@@ -1,0 +1,37 @@
+<view class="container">
+    <!-- 发布平台/备注 -->
+    <view class="issuer">
+        <view class="title">备注</view>
+        <view class="input" style="border-color: {{issuerInput?'#3273DC':''}}">
+            <input data-element="issuer" bindfocus="focusHandle" bindblur="blurHandle" model:value="{{issuer}}"/>
+        </view>
+    </view>
+    <!-- 账号 -->
+    <view class="account">
+        <view class="title">账号</view>
+        <view class="input" style="border-color: {{accountInput?'#3273DC':''}}">
+            <input data-element="account" bindfocus="focusHandle" bindblur="blurHandle"
+                   model:value="{{account}}"/>
+        </view>
+    </view>
+    <!-- 图标 -->
+    <view class="icon">
+        <view class="title">图标</view>
+        <view class="upload">
+            <view class="choose" bind:tap="chooseImage">
+                <text>上传图片...</text>
+            </view>
+            <view wx:if="{{token.logo_url}}" class="preview">
+                <image src="{{token.logo_url}}"/>
+            </view>
+        </view>
+    </view>
+
+    <view class="operation">
+        <view class="save" bind:tap="save">保存</view>
+        <view class="cancel" bind:tap="cancel">
+            <text>取消</text>
+        </view>
+    </view>
+
+</view>
