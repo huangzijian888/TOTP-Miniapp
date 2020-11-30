@@ -117,7 +117,7 @@ Page({
                 if (res.confirm) {
                     tokens.splice(index, 1)
                     const result = self.updateTokenStorage(tokens);
-                    if (result === 'success') {
+                    if (result) {
                         wx.showToast({
                             title: '删除成功',
                         })
@@ -221,24 +221,23 @@ Page({
         return -1;
     },
     /**
-     * 更新本地缓存及应用 tokens
+     * 更新本地缓存和 data 里面的 tokens 值
      * @param tokens
+     * @returns {boolean} 成功返回 true 失败返回 false
      */
     updateTokenStorage: function (tokens) {
         if (!tokens) {
-            return 'error';
+            return false;
         }
-        wx.setStorage({
-            key: 'tokens',
-            data: tokens,
-            fail: () => {
-                return 'error';
-            }
-        });
+        try {
+            wx.setStorageSync("tokens", tokens);
+        } catch (error) {
+            return false;
+        }
         this.setData({
             tokens
         })
-        return 'success';
+        return true;
     },
     /**
      * 生命周期函数--监听页面隐藏
