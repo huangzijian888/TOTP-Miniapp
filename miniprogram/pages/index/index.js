@@ -154,21 +154,22 @@ Page({
      */
     addToken: function (result_url) {
         const secret = util.getQueryByName(result_url, "secret");
-        const issuer = util.getQueryByName(result_url, "issuer");
+        let issuer = util.getQueryByName(result_url, "issuer");
         const account = util.getAccount(result_url)
-        if (!secret || !issuer || !account) {
+        issuer = issuer === null ? "" : issuer
+        if (!secret || !account) {
             wx.showModal({
                 title: '错误',
                 content: '不是合法的 TOTP 码',
                 showCancel: false,
-            })
+            });
             return;
         } else if (null == TOTP.now(secret)) {
             wx.showModal({
                 title: '错误',
                 content: 'secret 不合法',
                 showCancel: false,
-            })
+            });
             return;
         }
         let token = {
